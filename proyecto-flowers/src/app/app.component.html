@@ -1,0 +1,33 @@
+<header>
+  <div class="header-container">
+    <h1 class="logo">Tu tienda de flores</h1>
+    <nav>
+      <a *ngIf="isSessionActive" class="menu-text" routerLink="/flores">
+        <img class="icon" src="./../assets/images/icons8-flor-50.png" alt="flor-menu">Flores
+      </a>
+      <a *ngIf="isSessionActive" class="menu-text" routerLink="/ramos">
+        <img class="icon" src="./../assets/images/icons8-ramo-de-novia-50.png" alt="ramo-menu">Ramos
+      </a>
+      <a *ngIf="isSessionActive" class="menu-text" routerLink="/funerales">
+        <img class="icon" src="./../assets/images/icons8-entierro-50.png" alt="funeral-menu">Funerales
+      </a>
+      <a *ngIf="isSessionActive" class="menu-text" routerLink="/bodas">
+        <img class="icon" src="./../assets/images/icons8-boda-50.png" alt="boda-menu">Bodas
+      </a>
+      <a *ngIf="isSessionActive" class="menu-text" routerLink="/cart">
+        <img class="icon" src="./../assets/images/icons8-carro-50.png" alt="carrito-menu">
+        Carrito
+        <span class="cart-counter" *ngIf="getCartItemCount() > 0">
+          {{ getCartItemCount() }}
+        </span>
+      </a>
+      <a *ngIf="isSessionActive" (click)="logout()" class="menu-text" routerLink="/">
+        <img  class="icon" src="./../assets/images/icons8-cierre-de-sesión-redondeado-hacia-abajo-50.png" alt="flor-menu">Cerrar Sesión
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <router-outlet></router-outlet>
+</main>

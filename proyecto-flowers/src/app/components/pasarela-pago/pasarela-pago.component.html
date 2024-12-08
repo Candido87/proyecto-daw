@@ -1,0 +1,104 @@
+<div class="payment-container">
+  <h2 class="payment-title">Pasarela de Pago</h2>
+
+  <div *ngIf="!paymentSuccess">
+    <h3>Total a Pagar: {{ getTotal() | currency }}</h3>
+
+    <form (ngSubmit)="processPayment()" #paymentForm="ngForm">
+      <div class="form-group">
+        <label for="customerName">Nombre del Cliente:</label>
+        <input 
+          id="customerName" 
+          type="text" 
+          [(ngModel)]="customerName" 
+          name="customerName" 
+          required 
+          #customerNameField="ngModel">
+        <div *ngIf="customerNameField.invalid && customerNameField.touched" class="error">
+          Nombre es requerido.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Dirección:</label>
+        <input 
+          id="address" 
+          type="text" 
+          [(ngModel)]="address" 
+          name="address" 
+          required 
+          #addressField="ngModel">
+        <div *ngIf="addressField.invalid && addressField.touched" class="error">
+          Dirección es requerida.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Método de Pago:</label>
+        <select 
+          [(ngModel)]="paymentMethod" 
+          name="paymentMethod" 
+          required 
+          #paymentMethodField="ngModel">
+          <option value="card">Tarjeta</option>
+          <option value="paypal">PayPal</option>
+          <option value="transfer">Transferencia</option>
+        </select>
+        <div *ngIf="paymentMethodField.invalid && paymentMethodField.touched" class="error">
+          Método de pago es requerido.
+        </div>
+      </div>
+
+      <div *ngIf="paymentMethod === 'card'" class="form-group">
+        <label for="cardNumber">Número de Tarjeta:</label>
+        <input 
+          id="cardNumber" 
+          type="text" 
+          [(ngModel)]="cardNumber" 
+          name="cardNumber" 
+          required 
+          pattern="\\d{16}" 
+          #cardNumberField="ngModel">
+        <div *ngIf="cardNumberField.invalid && cardNumberField.touched" class="error">
+          Número de tarjeta es requerido y debe tener 16 dígitos.
+        </div>
+      </div>
+
+      <div *ngIf="paymentMethod === 'paypal'" class="form-group">
+        <label for="paypalEmail">Correo de PayPal:</label>
+        <input 
+          id="paypalEmail" 
+          type="email" 
+          [(ngModel)]="paypalEmail" 
+          name="paypalEmail" 
+          required 
+          #paypalEmailField="ngModel">
+        <div *ngIf="paypalEmailField.invalid && paypalEmailField.touched" class="error">
+          Correo de PayPal es requerido.
+        </div>
+      </div>
+
+      <div *ngIf="paymentMethod === 'transfer'" class="form-group">
+        <label for="transferReference">Referencia de Transferencia:</label>
+        <input 
+          id="transferReference" 
+          type="text" 
+          [(ngModel)]="transferReference" 
+          name="transferReference" 
+          required 
+          #transferReferenceField="ngModel">
+        <div *ngIf="transferReferenceField.invalid && transferReferenceField.touched" class="error">
+          Referencia de transferencia es requerida.
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="paymentForm.invalid">Procesar Pago</button>
+    </form>
+    <p class="compra" *ngIf="!getTotal()">No tiene nada en su cesta de la compra</p>
+  </div>
+
+  <div *ngIf="paymentSuccess">
+    <h3>Pago Exitoso</h3>
+    <p>Gracias por tu compra, {{ customerName }}. Tu pedido llegará pronto a {{ address }}.</p>
+  </div>
+</div>

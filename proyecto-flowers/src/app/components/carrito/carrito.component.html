@@ -1,0 +1,80 @@
+<div class="cart-container">
+    <h2 class="cart-title">Tu carrito de compras</h2>
+  
+    <div class="cart-items">
+      <div class="cart-item" *ngFor="let item of groupedCart">
+        <img class="product-image" [src]="item.product.image" alt="{{ item.product.name }}">
+        <div class="product-details">
+          <h3 class="product-name">{{ item.product.name }}</h3>
+          <p class="product-description">{{ item.product.description }}</p>
+        </div>
+        <div *ngIf="floresCount() > 0" class="cart-counter">
+          <button class="countBtn" (click)="removeFromCart(item.product)">-</button>
+          <span class="count">{{ floresCount() }}</span>
+          <button class="countBtn" (click)="addFlores(item.product)" >+</button>
+        </div>
+        <p class="product-price">{{ item.product.price | currency }}</p>
+        <button class="remove-btn" (click)="removeFromCart(item.product)"><img class="icon" src="./../../../assets/images/icons8-basura-64.png" alt="">Eliminar</button>
+    </div>
+
+    <div class="cart-items">
+      <div class="cart-item" *ngFor="let item of groupedCartBodas">
+        <img class="product-image" [src]="item.product.image" alt="{{ item.product.name }}">
+        <div class="product-details">
+          <h3 class="product-name">{{ item.product.name }}</h3>
+          <p class="product-description">{{ item.product.description }}</p>
+        </div>
+        <div *ngIf="bodasCount() > 0" class="cart-counter">
+          <button class="countBtn" (click)="removeBodas(item.product)">-</button>
+          <span class="count">{{ bodasCount() }}</span>
+          <button class="countBtn" (click)="addBodas(item.product)" >+</button>
+        </div>
+        <p class="product-price">{{ item.product.price | currency }}</p>
+        <button class="remove-btn" (click)="removeBodas(item.product)"><img class="icon" src="./../../../assets/images/icons8-basura-64.png" alt="">Eliminar</button>
+    </div>
+  
+
+    <div class="cart-items">
+      <div class="cart-item" *ngFor="let item of groupedCartFunerales">
+        <img class="product-image" [src]="item.product.image" alt="{{ item.product.name }}">
+        <div class="product-details">
+          <h3 class="product-name">{{ item.product.name }}</h3>
+          <p class="product-description">{{ item.product.description }}</p>
+        </div>
+        <div *ngIf="bodasCount() > 0" class="cart-counter">
+          <button class="countBtn" (click)="removeFromCoronas(item.product)">-</button>
+          <span class="count">{{ funeralesCount() }}</span>
+          <button class="countBtn" (click)="addFunerales(item.product)" >+</button>
+        </div>
+        <p class="product-price">{{ item.product.price | currency }}</p>
+        <button class="remove-btn" (click)="removeFromCoronas(item.product)"><img class="icon" src="./../../../assets/images/icons8-basura-64.png" alt="">Eliminar</button>
+    </div>
+  
+
+    <div class="cart-items">
+      <div class="cart-item" *ngFor="let item of groupedCartRamos">
+        <img class="product-image" [src]="item.product.image" alt="{{ item.product.name }}">
+        <div class="product-details">
+          <h3 class="product-name">{{ item.product.name }}</h3>
+          <p class="product-description">{{ item.product.description }}</p>
+        </div>
+        <div *ngIf="ramosCount() > 0" class="cart-counter">
+          <button class="countBtn" (click)="removeFromRamos(item.product)">-</button>
+          <span class="count" >{{ ramosCount() }}</span>
+          <button class="countBtn" (click)="addRamos(item.product)" >+</button>
+        </div>
+        <p class="product-price">{{ item.product.price | currency }}</p>
+        <button class="remove-btn" (click)="removeFromRamos(item.product)"><img class="icon" src="./../../../assets/images/icons8-basura-64.png" alt="">Eliminar</button>
+    </div>
+  
+  
+    <div class="cart-summary">
+      <p class="summary-item total"><span>Total General:</span> <span>{{ getGrandTotal() | currency }}</span></p>
+      <button class="checkout-btn" (click)="clearCart()">Vaciar Carrito</button>
+    </div>
+    <div class="link">
+        <a  routerLink="/pago"><button class="btn" *ngIf="getGrandTotal() > 0">Pagar</button></a>
+    </div>
+    
+  </div>
+  
